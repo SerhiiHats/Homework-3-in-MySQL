@@ -12,9 +12,7 @@ PRIMARY KEY (id_soldat));
 INSERT INTO Arms.soldat (name_soldat, ksiva_soldat, vzvod_soldat) VALUE ('Петров В.А.','оф.205','222');
 INSERT INTO Arms.soldat (name_soldat, ksiva_soldat, vzvod_soldat) VALUE ('Лодарев П.С.','оф.221','232');
 INSERT INTO Arms.soldat (name_soldat, ksiva_soldat, vzvod_soldat) VALUE ('Леонтьев К.В.','оф.201','212');
-INSERT INTO Arms.soldat (name_soldat, vzvod_soldat) VALUE ('Духов','200');
-
-UPDATE Arms.soldat SET name_soldat = 'Духов Р.М.' WHERE id_soldat = '4';
+INSERT INTO Arms.soldat (name_soldat, vzvod_soldat) VALUE ('Духов Р.М.','200');
 
 SELECT * FROM arms.soldat;
 
@@ -60,16 +58,15 @@ INSERT INTO Arms.soldat_weapon (id_soldat, id_weapon, id_chief) VALUE (4, 1, 1);
 
 SELECT * FROM Arms.soldat_weapon;
 
-SELECT name_weapon FROM arms.weapon WHERE id_weapon IN (SELECT id_weapon FROM Arms.soldat_weapon WHERE id_soldat = (SELECT id_soldat FROM arms.soldat WHERE name_soldat = 'Леонтьев К.В.'));
+SELECT name_weapon FROM arms.weapon WHERE id_weapon IN (SELECT id_weapon FROM Arms.soldat_weapon WHERE id_soldat = (SELECT id_soldat FROM arms.soldat WHERE name_soldat Like 'Петров%'));
 
-SELECT name_weapon FROM arms.weapon WHERE id_weapon IN (SELECT id_weapon FROM Arms.soldat_weapon WHERE id_soldat = (SELECT id_soldat FROM arms.soldat WHERE name_soldat = 'Духов Р.М.'));
+SELECT name_weapon FROM arms.weapon WHERE id_weapon IN (SELECT id_weapon FROM Arms.soldat_weapon WHERE id_soldat = (SELECT id_soldat FROM arms.soldat WHERE name_soldat Like '%ухов%'));
 
 SELECT name_weapon FROM arms.weapon WHERE id_weapon IN (SELECT id_weapon FROM Arms.soldat_weapon WHERE id_soldat = (SELECT id_soldat FROM arms.soldat WHERE name_soldat = 'Петров В.А.'));
 
-DROP TABLE arms.soldat_weapon;
-DROP TABLE arms.weapon;
-DROP TABLE arms.soldat;
-DROP TABLE arms.chief_of_arms;
+SELECT name_weapon FROM arms.weapon WHERE id_weapon IN (SELECT id_weapon FROM Arms.soldat_weapon WHERE id_soldat = (SELECT id_soldat FROM arms.soldat WHERE name_soldat = 'Лодарев П.С.'));
 
+SELECT name_weapon FROM arms.weapon WHERE id_weapon IN (SELECT id_weapon FROM Arms.soldat_weapon WHERE id_soldat = (SELECT id_soldat FROM arms.soldat WHERE name_soldat = 'Леонтьев К.В.'));
 
+SELECT name_weapon FROM arms.weapon WHERE id_weapon IN (SELECT id_weapon FROM Arms.soldat_weapon WHERE id_soldat = (SELECT id_soldat FROM arms.soldat WHERE name_soldat = 'Духов Р.М.'));
 

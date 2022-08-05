@@ -216,7 +216,70 @@ VALUES
 
 SELECT * FROM cadry.employee_bank_accounts;
 
+CREATE TABLE Employee_language_skills(
+id_els INT AUTO_INCREMENT,
+id_emp INT NOT NULL,
+name_language VARCHAR(30) NOT NULL,
+level_language VARCHAR(30) NOT NULL,
+PRIMARY KEY (id_els),
+FOREIGN KEY (id_emp) REFERENCES cadry.employees (id_emp)
+ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO cadry.employee_language_skills (id_emp, name_language, level_language) 
+VALUES 
+(1, 'українська', 'вільне володіння'),
+(1, 'російська', 'вільне володіння'),
+(1, 'молдавська', 'початковий рівень'),
+(2, 'українська', 'вільне володіння'),
+(2, 'російська', 'вільне володіння'),
+(2, 'болгарська', 'початковий рівень'),
+(2, 'англійська', 'початковий рівень'),
+(3, 'українська', 'вільне володіння'),
+(3, 'російська', 'вільне володіння'),
+(3, 'англійська', 'середній рівень'),
+(4, 'українська', 'вільне володіння'),
+(4, 'російська', 'вільне володіння'),
+(4, 'французька', 'початковий рівень'),
+(5, 'українська', 'вільне володіння'),
+(5, 'російська', 'вільне володіння'),
+(5, 'англійська', 'вільне володіння'),
+(5, 'польська', 'середній рівень'),
+(5, 'німецька', 'початковий рівень');
+
+SELECT * FROM cadry.employee_language_skills;
+
+CREATE TABLE Employee_education(
+id_educ INT AUTO_INCREMENT,
+id_emp INT NOT NULL,
+level_educational VARCHAR(30) NOT NULL,
+name_institution VARCHAR(200) NOT NULL,
+specialty VARCHAR(100) NOT NULL DEFAULT ' ',
+qualification VARCHAR(30) NOT NULL DEFAULT ' ',
+end_date_year YEAR NOT NULL,
+PRIMARY KEY (id_educ),
+FOREIGN KEY (id_emp) REFERENCES cadry.employees (id_emp)
+ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+INSERT INTO cadry.employee_education (id_emp, level_educational, name_institution, specialty, qualification, end_date_year) 
+VALUES 
+(1, 'середня', 'Коледж промислової автоматики та інформаційних технологій', 'автоматизація та приладобудування','електромеханік', '2002'),
+(1, 'повна вища', 'Одеський Національний політехнічний університет', 'економіка підприємства','економіст', '2005'),
+(2, 'середня', 'ЗОСШ № 15 Одеської міскої ради', ' ',' ', '2004'),
+(2, 'повна вища', 'Ізмаїльський інститут водного транспорту', 'облік та аудіт на підприємстві','бухгалтер', '2009'),
+(3, 'середня', 'ЗОСШ № 3 Вилківської міскої ради', ' ', ' ', '1997'),
+(3, 'повна вища', 'Одеська  Національна юридична академія', 'правознавство','юрист', '2004'),
+(4, 'середня', 'ЗОСШ №54', ' ',' ', '2011'),
+(4, 'неповна вища', 'Одеська Національна академія харчових технологій', 'технологія харчування','технолог', '2022'),
+(5, 'середня', 'Коледж економіки на промисловому підприємстві', 'автоматизація виробництва','інженер автоматизації', '2000'),
+(5, 'повна вища', 'Одеський економічний університет', 'банківська справа','менеджер-аналітик', '2007');
+
+SELECT * FROM cadry.employee_education;
+
 SELECT iban_emp, name_bank, description_iban FROM cadry.employee_bank_accounts WHERE id_emp = (SELECT id_emp FROM cadry.employees WHERE last_name_emp Like 'Балев%');
+
+SELECT  last_name_emp, first_name_emp, middle_name_emp, gender_emp, birthday_emp FROM cadry.employees WHERE id_emp IN (SELECT id_emp FROM cadry.employee_education WHERE level_educational = 'повна вища');
 
 SELECT  phone, info_of_phone FROM cadry.employee_phone WHERE id_emp = (SELECT id_emp FROM cadry.employees WHERE last_name_emp Like 'Балев%');
 

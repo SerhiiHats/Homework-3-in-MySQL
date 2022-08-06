@@ -283,5 +283,37 @@ SELECT  last_name_emp, first_name_emp, middle_name_emp, gender_emp, birthday_emp
 
 SELECT  phone, info_of_phone FROM cadry.employee_phone WHERE id_emp = (SELECT id_emp FROM cadry.employees WHERE last_name_emp Like 'Балев%');
 
+SELECT employees.last_name_emp, employees.first_name_emp, employees.middle_name_emp, employee_phone.phone, employee_phone.info_of_phone FROM Employees
+JOIN cadry.employee_phone ON employees.id_emp = cadry.employee_phone.id_emp;
+
+SELECT employees.last_name_emp, employees.first_name_emp, employees.middle_name_emp, employee_phone.phone, employee_phone.info_of_phone FROM Employees
+JOIN cadry.employee_phone ON employees.id_emp = cadry.employee_phone.id_emp
+WHERE employees.last_name_emp = 'Буюклі';
+
+SELECT employees.last_name_emp, employees.first_name_emp, employees.middle_name_emp, employees.rnokpp_emp, employee_bank_accounts.iban_emp, employee_bank_accounts.name_bank, employee_bank_accounts.description_iban FROM Employees
+JOIN cadry.employee_bank_accounts ON employees.id_emp = cadry.employee_bank_accounts.id_emp
+WHERE employees.last_name_emp = 'Буюклі';
+
+SELECT employees.last_name_emp, employees.first_name_emp, employees.middle_name_emp, 
+employee_address.main_place, employee_address.zip_cod, employee_address.region, employee_address.area, employee_address.set_city, 
+employee_address.city, employee_address.set_street, employee_address.street, employee_address.numb_building, employee_address.numb_korpus, employee_address.numb_room  FROM Employees
+JOIN cadry.employee_address ON cadry.employees.id_emp = cadry.employee_address.id_emp
+WHERE employees.last_name_emp = 'Балева';
+
+SELECT employees.last_name_emp, employees.first_name_emp, employees.middle_name_emp, 
+employee_address.main_place, employee_address.zip_cod, employee_address.region, employee_address.area, employee_address.set_city, 
+employee_address.city, employee_address.set_street, employee_address.street, employee_address.numb_building, employee_address.numb_korpus, employee_address.numb_room  FROM Employees
+JOIN cadry.employee_address ON cadry.employees.id_emp = cadry.employee_address.id_emp
+WHERE employees.last_name_emp = 'Антоненко';
+
+SELECT employees.last_name_emp, employees.first_name_emp, employees.middle_name_emp, employees.rnokpp_emp, employee_bank_accounts.iban_emp, employee_bank_accounts.name_bank, employee_bank_accounts.description_iban FROM Employees
+JOIN cadry.employee_bank_accounts ON employees.id_emp = cadry.employee_bank_accounts.id_emp
+WHERE employees.last_name_emp = 'Балева';
+
+SELECT employees.last_name_emp, employees.first_name_emp, employees.middle_name_emp, 
+employee_childs.childs, employee_childs.first_name_child, employee_childs.birthday_emp_child FROM Employees
+LEFT JOIN employee_childs ON employees.id_emp = employee_childs.id_emp
+-- WHERE employees.last_name_emp = 'Балева';
+
 
 
